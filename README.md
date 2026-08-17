@@ -2,8 +2,12 @@
 
 > A B-end AI operations efficiency tool for e-commerce Flash Sale management — built from real TikTok Shop internship experience.
 
+[![CI](https://github.com/Chenyuxin66/ai-flash-sale-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/Chenyuxin66/ai-flash-sale-assistant/actions)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/tests-10%20passed-brightgreen.svg)](tests/)
+
+> 🟢 **CI status:** every push to `main` automatically runs the full test suite (Python 3.10/3.11/3.12) plus an end-to-end demo smoke test on GitHub Actions.
 
 ## Overview
 
@@ -54,10 +58,18 @@ Validates seller submissions for Flash Sale registration:
 
 ## Quick Start
 
+### One-Click Demo (see it working in 10 seconds)
+
+```bash
+python demo.py
+```
+
+This runs the **entire workflow end-to-end** on the sample dataset — product scoring, weekly insight report generation, and seller registration check — and prints everything to the console. It is the fastest way to verify the tool works without reading any code.
+
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/ai-flash-sale-assistant.git
+git clone https://github.com/Chenyuxin66/ai-flash-sale-assistant.git
 cd ai-flash-sale-assistant
 pip install -r requirements.txt
 ```
@@ -190,11 +202,38 @@ STRATEGY_LABELS = {
 - **click** — CLI framework
 - **pytest** — Testing
 
-## Background
+## Background & Origin Story
 
-This project was designed during an internship at TikTok Shop (Malaysia) Lifestyle Category Operations. The original product plan included a full PRD with user research, pain point analysis, and MVP validation design. This repository implements the core logic as a runnable Python tool.
+### The pain point (from real internship experience)
 
-See `docs/PRD.md` for the complete product requirements document.
+During my internship at **TikTok Shop (Malaysia) — Lifestyle Category Operations**, I noticed Flash Sale selection was done mostly **manually in Excel**:
+
+- Operators scored products **by gut feeling** instead of a consistent formula — the same product could get different scores from different people.
+- Weekly performance analysis took **~2 hours** of copy-pasting and pivot tables.
+- Seller registrations arrived with **missing fields** (no SKU, no discount, no stock), and follow-ups were typed out one by one.
+
+None of this was a "product" yet — it was my observation of how the team actually worked, and the inefficiencies I could quantify.
+
+### From observation to tool
+
+I turned that observation into a **product idea** (full PRD in `docs/PRD.md`): an AI assistant that automates the three most repetitive workflows — *scoring, insight, registration check*.
+
+Then I went one step further and **implemented it as a runnable Python tool**:
+
+- Designed a **weighted scoring model** (GMV 40% / Conversion 30% / Discount 20% / Seller 10%) that encodes the selection logic we used in operations — making decisions **objective and reproducible**.
+- Built a **rule-based insight engine** that mimics the "AI generates → human verifies" workflow used in production, producing the same structured weekly report.
+- Built a **registration checker** that auto-generates seller follow-up messages — the exact outreach flow I used to write by hand.
+
+### Why this project matters
+
+| Before (manual) | After (this tool) |
+|---|---|
+| Subjective, inconsistent product scoring | Consistent, explainable weighted score |
+| ~2h/week manual analysis | Seconds, reproducible weekly report |
+| Missed seller fields caught after the fact | Instant validation + auto follow-up |
+| No audit trail of decisions | Every score is traceable to its inputs |
+
+This project demonstrates: **product sense** (finding a real ops pain point and quantifying it), **execution** (turning an idea into working code with tests and docs), and **business impact thinking** (every feature maps to a time-saving workflow).
 
 ## License
 
