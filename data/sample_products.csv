@@ -1,0 +1,31 @@
+﻿product_id,product_name,category,historical_gmv,conversion_rate,discount_pct,original_price,flash_price,seller_rating,seller_response_rate,stock_units,product_link,sku,has_discount,has_stock
+FS001,Wireless Bluetooth Earbuds Pro,Electronics,15000,0.085,35,199,129,4.8,0.95,500,https://example.com/p/fs001,SKU-FS001-PRO,Yes,Yes
+FS002,LED Strip Light 5M RGB,Home,8200,0.062,40,89,53,4.5,0.88,1200,https://example.com/p/fs002,SKU-FS002-RGB,Yes,Yes
+FS003,Skincare Set Vitamin C,Beauty,22000,0.110,30,299,209,4.9,0.97,300,https://example.com/p/fs003,SKU-FS003-VTC,Yes,Yes
+FS004,Portable Mini Fan USB,Electronics,3200,0.045,25,59,44,4.2,0.80,800,https://example.com/p/fs004,SKU-FS004-FAN,Yes,Yes
+FS005,Yoga Mat Non-Slip 6mm,Sports,6800,0.058,35,79,51,4.6,0.90,450,https://example.com/p/fs005,SKU-FS005-YM6,Yes,Yes
+FS006,Smart Watch Fitness Tracker,Electronics,18500,0.072,30,259,181,4.7,0.93,250,https://example.com/p/fs006,SKU-FS006-SW,Yes,Yes
+FS007,Hair Dryer 1800W Negative Ion,Home,9500,0.068,40,129,77,4.4,0.85,600,https://example.com/p/fs007,SKU-FS007-HD,Yes,Yes
+FS008,Cotton T-Shirt Oversized,Fashion,4500,0.038,50,69,34,4.1,0.75,1500,https://example.com/p/fs008,SKU-FS008-TS,Yes,Yes
+FS009,Protein Powder Whey 1kg,Health,12000,0.082,20,189,151,4.8,0.92,200,https://example.com/p/fs009,SKU-FS009-PP,Yes,Yes
+FS010,Phone Case iPhone 15 Pro,Fashion,2200,0.025,45,39,21,4.0,0.70,2000,https://example.com/p/fs010,SKU-FS010-PC,Yes,Yes
+FS011,Mechanical Keyboard RGB,Electronics,11000,0.065,30,189,132,4.6,0.91,350,https://example.com/p/fs011,SKU-FS011-KB,Yes,Yes
+FS012,Sunscreen SPF50+ PA++++,Beauty,16000,0.095,35,89,58,4.7,0.94,400,https://example.com/p/fs012,SKU-FS012-SS,Yes,Yes
+FS013,Air Fryer 5L Digital,Home,26000,0.078,25,399,299,4.9,0.96,180,https://example.com/p/fs013,SKU-FS013-AF,Yes,Yes
+FS014,Resistance Band Set 5pcs,Sports,3800,0.050,40,49,29,4.3,0.82,900,https://example.com/p/fs014,SKU-FS014-RB,Yes,Yes
+FS015,Lipstick Matte Long Lasting,Beauty,8800,0.072,30,79,55,4.5,0.89,700,https://example.com/p/fs015,SKU-FS015-LP,Yes,Yes
+FS016,USB-C Cable Fast Charging 2M,Electronics,1800,0.020,50,29,14,3.9,0.65,3000,https://example.com/p/fs016,SKU-FS016-UC,Yes,Yes
+FS017,Bed Sheet Set Queen Size,Home,7500,0.055,35,159,103,4.4,0.87,280,https://example.com/p/fs017,SKU-FS017-BS,Yes,Yes
+FS018,Baby Formula Stage 2 900g,Health,21000,0.090,15,289,245,4.9,0.98,150,https://example.com/p/fs018,SKU-FS018-BF,Yes,Yes
+FS019,Sneakers Running Mesh,Fashion,9200,0.060,35,199,129,4.5,0.88,380,https://example.com/p/fs019,SKU-FS019-SN,Yes,Yes
+FS020,Coffee Maker Drip 12 Cup,Home,14000,0.070,30,249,174,4.7,0.92,220,https://example.com/p/fs020,SKU-FS020-CM,Yes,Yes
+FS021,Bluetooth Speaker Waterproof,Electronics,7800,0.055,40,119,71,4.3,0.85,500,https://example.com/p/fs021,SKU-FS021-BS,Yes,Yes
+FS022,Face Serum Hyaluronic Acid,Beauty,19000,0.088,25,159,119,4.8,0.95,320,https://example.com/p/fs022,SKU-FS022-FS,Yes,Yes
+FS023,Dumbbell Set Adjustable 20kg,Sports,5500,0.042,30,299,209,4.2,0.80,120,https://example.com/p/fs023,SKU-FS023-DB,Yes,Yes
+FS024,Backpack Laptop Waterproof,Fashion,6500,0.048,35,139,90,4.4,0.86,450,https://example.com/p/fs024,SKU-FS024-BP,Yes,Yes
+FS025,Rice Cooker 1.8L Smart,Home,13000,0.065,25,189,142,4.6,0.91,300,https://example.com/p/fs025,SKU-FS025-RC,Yes,Yes
+FS026,T-Shirt Graphic Print,Fashion,1200,0.015,55,49,22,3.7,0.60,1800,,SKU-FS026-TG,Yes,Yes
+FS027,Power Bank 20000mAh PD,Electronics,9800,0.060,35,129,84,4.5,0.89,400,,SKU-FS027-PB,Yes,Yes
+FS028,Night Cream Retinol,Beauty,11500,0.075,30,139,97,4.6,0.90,350,https://example.com/p/fs028,,Yes,Yes
+FS029,Jump Rope Adjustable,Sports,1500,0.018,45,25,14,3.8,0.55,1000,https://example.com/p/fs029,SKU-FS029-JR,Yes,No
+FS030,Electric Toothbrush Sonic,Health,8500,0.058,40,99,59,4.4,0.85,500,https://example.com/p/fs030,SKU-FS030-ET,Yes,Yes
