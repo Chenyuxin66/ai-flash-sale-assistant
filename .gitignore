@@ -12,3 +12,5 @@ venv/
 .DS_Store
 Thumbs.db
 *.csv.bak
+.pytest_cache/
+demo_output.txt
