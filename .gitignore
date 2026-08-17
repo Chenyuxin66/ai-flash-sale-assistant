@@ -14,3 +14,4 @@ Thumbs.db
 *.csv.bak
 .pytest_cache/
 demo_output.txt
+.workbuddy/
