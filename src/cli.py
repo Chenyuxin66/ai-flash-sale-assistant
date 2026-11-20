@@ -4,16 +4,20 @@ AI Flash Sale Assistant - CLI Interface
 Command-line tool for Flash Sale operations.
 
 Commands:
-    score    - Score products and generate strategy labels
-    insight  - Generate weekly performance insight report
-    check    - Validate seller registration completeness
-    report   - Generate a comprehensive report (all three combined)
+    score        - Score products and generate strategy labels
+    insight      - Generate weekly performance insight report (rule-based)
+    check        - Validate seller registration completeness
+    report       - Generate a comprehensive report (all three combined)
+    ai-insight   - AI weekly briefing (rule facts -> LLM interpretation)
+    ai-followup  - AI English follow-up message for registration anomalies
 
 Usage:
     python -m src.cli score --input data/sample_products.csv
     python -m src.cli insight --input data/sample_products.csv
     python -m src.cli check --input data/sample_products.csv
     python -m src.cli report --input data/sample_products.csv --output report.txt
+    python -m src.cli ai-insight --input data/sample_products.csv
+    python -m src.cli ai-followup --input data/sample_products.csv --seller "Seller A"
 """
 
 import sys
@@ -27,6 +31,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.scoring import FlashSaleScorer
 from src.insight_generator import InsightGenerator
 from src.registration_checker import RegistrationChecker
+from src.ai_client import AIClient
+from src.ai_insight_enhancer import AIInsightEnhancer
 
 
 def load_data(file_path: str) -> pd.DataFrame:
@@ -195,6 +201,71 @@ def report(input_path, output_path):
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(output_text)
         click.echo(f"\n  Report saved to: {output_path}")
+
+
+@cli.command()
+@click.option("--input", "-i", "input_path", required=True, help="Path to product CSV file")
+@click.option("--output", "-o", "output_path", default=None, help="Output Markdown file path")
+def ai_insight(input_path, output_path):
+    """Generate an AI weekly briefing (rule engine computes facts, LLM interprets).
+
+    Requires AI_API_KEY in .env; degrades to the rule-based report otherwise.
+    """
+    df = load_data(input_path)
+
+    # Stage 1: rule engine computes the facts
+    generator = InsightGenerator()
+    report = generator.generate(df)
+    rule_text = generator.format_report(report)
+
+    # Stage 2: LLM interprets the facts
+    client = AIClient()
+    click.echo(client.describe())
+    enhancer = AIInsightEnhancer(client)
+    briefing = enhancer.enhance_weekly_briefing(df, report, fallback=rule_text)
+
+    click.echo("\n" + briefing + "\n")
+
+    if output_path:
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(briefing)
+        click.echo(f"  Briefing saved to: {output_path}")
+
+
+@cli.command()
+@click.option("--input", "-i", "input_path", required=True, help="Path to product CSV file")
+@click.option("--seller", "-s", default="Seller", help="Seller/AM name to address")
+@click.option("--output", "-o", "output_path", default=None, help="Output file path")
+def ai_followup(input_path, seller, output_path):
+    """Generate an AI English follow-up message for registration anomalies."""
+    df = load_data(input_path)
+
+    checker = RegistrationChecker()
+    results = checker.check_all(df)
+    incomplete = checker.get_incomplete(results)
+
+    if not incomplete:
+        click.echo("All registrations are complete - nothing to follow up.")
+        return
+
+    # Stage 1: template message as fallback
+    template_msg = checker.generate_followup_message(results, seller)
+
+    # Stage 2: AI-polished, issue-grouped follow-up
+    client = AIClient()
+    click.echo(client.describe())
+    enhancer = AIInsightEnhancer(client)
+    message = enhancer.enhance_followup_message(incomplete, seller, fallback=template_msg)
+
+    click.echo("\n" + "-" * 60)
+    click.echo(f"  AI Follow-up Message for {seller}:")
+    click.echo("-" * 60)
+    click.echo(message + "\n")
+
+    if output_path:
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(message)
+        click.echo(f"  Message saved to: {output_path}")
 
 
 if __name__ == "__main__":

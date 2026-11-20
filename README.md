@@ -88,7 +88,39 @@ python -m src.cli check -i data/sample_products.csv --seller "ABC Store"
 
 # Generate comprehensive report (all three combined)
 python -m src.cli report -i data/sample_products.csv -o report.txt
+
+# AI weekly briefing: rule engine computes facts, LLM interprets them
+python -m src.cli ai-insight -i data/sample_products.csv -o briefing.md
+
+# AI English follow-up message for registration anomalies
+python -m src.cli ai-followup -i data/sample_products.csv --seller "ABC Store"
 ```
+
+### Enabling Real AI (LLM API Integration)
+
+The core scoring/checking engine is deterministic rule code — it computes the
+facts (scores, rankings, anomalies). The AI commands add an LLM layer on top
+that does what rules cannot: attribution analysis, risk narrative, and
+prioritized action lists.
+
+The design principle: **the model never invents numbers — it only interprets
+facts computed by the rule engine**, so outputs stay grounded in data.
+
+To enable it, copy `.env.example` to `.env` and fill in your API key:
+
+```bash
+cp .env.example .env
+# then edit .env:
+#   AI_API_KEY=sk-xxxx
+#   AI_BASE_URL=https://api.deepseek.com/v1   (default; DeepSeek costs ~1 RMB / M tokens)
+#   AI_MODEL=deepseek-chat
+```
+
+Any OpenAI-compatible API works (DeepSeek / Zhipu GLM / Moonshot / Qwen / OpenAI) —
+just change `AI_BASE_URL` and `AI_MODEL`.
+
+Without a key, the AI commands gracefully degrade to the rule-based report
+(nothing crashes). Set `AI_MOCK=1` to test the pipeline without network calls.
 
 ### Example Output (Scoring)
 
@@ -146,16 +178,22 @@ ai-flash-sale-assistant/
 ├── src/
 │   ├── __init__.py
 │   ├── scoring.py              # Product scoring model
-│   ├── insight_generator.py    # Performance analysis engine
+│   ├── insight_generator.py    # Performance analysis engine (rule-based facts)
 │   ├── registration_checker.py # Registration validation
+│   ├── ai_client.py            # OpenAI-compatible LLM API client
+│   ├── ai_insight_enhancer.py  # Rule facts -> LLM interpretation layer
 │   └── cli.py                  # CLI interface
 ├── data/
 │   └── sample_products.csv     # Sample dataset (30 products)
 ├── tests/
-│   └── test_scoring.py         # Unit tests
+│   ├── test_scoring.py         # Unit tests
+│   └── test_ai_enhancer.py     # AI layer tests (offline, mock mode)
+├── outputs/
+│   └── sample_ai_briefing.md   # Sample AI briefing (mock mode)
 ├── docs/
 │   └── PRD.md                  # Product requirements document
 ├── requirements.txt
+├── .env.example                # AI API configuration template
 ├── .gitignore
 └── README.md
 ```
